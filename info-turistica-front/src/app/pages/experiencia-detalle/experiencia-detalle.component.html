@@ -1,0 +1,71 @@
+<!-- 🧭 Breadcrumb -->
+<div class="bg-gray-100 px-6 py-4 rounded-md" @fadeInUp>
+    <div class="flex flex-wrap items-center gap-1 sm:gap-2 text-gray-600 text-sm">
+      <ng-container *ngFor="let item of [
+        { label: 'Inicio', route: '/' },
+        { label: 'Experiencias', route: '/experiencias' },
+        { label: experiencia?.titulo }
+      ]; let last = last">
+        <ng-container *ngIf="!last">
+          <a [routerLink]="item.route" class="hover:underline text-blue-800 font-medium">{{ item.label }}</a>
+          <span class="mx-1 text-gray-400">/</span>
+        </ng-container>
+        <ng-container *ngIf="last">
+          <span class="text-blue-900 font-semibold">{{ item.label }}</span>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+  
+  <!-- ✨ Experiencia Detalle -->
+  <section *ngIf="experiencia" class="max-w-6xl mx-auto p-6 space-y-12" @fadeInStagger>
+  
+    <!-- 🏷 Título -->
+    <div class="text-center" @fadeInUp>
+      <h1 class="text-4xl md:text-5xl font-extrabold text-blue-950 leading-tight">
+        {{ experiencia.titulo }}
+      </h1>
+      <p *ngIf="experiencia.lugar?.nombre" class="text-gray-500 text-lg mt-2">
+        {{ experiencia.lugar.nombre }}
+      </p>
+    </div>
+  
+    <!-- 🖼 Galería -->
+    <div @fadeInUp>
+      <app-image-gallery [imagenes]="experiencia.imagenes"></app-image-gallery>
+    </div>
+  
+    <!-- 💬 Descripción -->
+    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 mt-10" @fadeInUp>
+      <p class="text-gray-800 leading-relaxed text-lg tracking-wide">
+        {{ experiencia.descripcion }}
+      </p>
+    </div>
+  
+    <!-- 📍 Lugar -->
+    <div *ngIf="experiencia.lugar" class="bg-white p-6 rounded-xl shadow-sm border border-gray-200" @fadeInUp>
+      <div class="flex items-center gap-2 mb-4">
+        <i class="fas fa-map-marker-alt text-blue-800 text-xl"></i>
+        <h2 class="text-xl font-semibold text-blue-900">Ubicación</h2>
+      </div>
+      <p class="text-gray-700 text-md">
+        {{ experiencia.lugar.ubicacion?.direccion }}
+      </p>
+    </div>
+  
+    <!-- ☎ Contacto -->
+    <div *ngIf="experiencia.contacto" class="bg-white p-6 rounded-xl shadow-sm border border-gray-200" @fadeInUp>
+      <div class="flex items-center gap-2 mb-4">
+        <i class="fas fa-phone-alt text-blue-800 text-xl"></i>
+        <h2 class="text-xl font-semibold text-blue-900">Contacto</h2>
+      </div>
+      <div class="space-y-1 text-gray-700 text-md">
+        <p *ngIf="experiencia.contacto.email">📧 {{ experiencia.contacto.email }}</p>
+        <p *ngIf="experiencia.contacto.whatsapp">📱 {{ experiencia.contacto.whatsapp }}</p>
+        <p *ngIf="experiencia.contacto.instagram">📸 {{ experiencia.contacto.instagram }}</p>
+        <p *ngIf="experiencia.contacto.facebook">📘 {{ experiencia.contacto.facebook }}</p>
+      </div>
+    </div>
+  
+  </section>
+  

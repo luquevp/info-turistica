@@ -1,0 +1,39 @@
+<div class="flex flex-col min-h-screen bg-gray-100 ">
+  
+  
+  <!-- NAVBAR -->
+  <div class="sticky top-0 z-50">
+    <app-navbar></app-navbar>
+  </div>
+
+  <!-- HEADER 
+  <header class="bg-white shadow-sm">
+    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+     <h1 class="text-3xl font-bold tracking-tight text-gray-900">Rosario de la Frontera</h1> 
+    </div>
+  </header>
+-->
+  
+  <!-- CONTENIDO -->
+  <main class="flex-grow">
+      <router-outlet></router-outlet>
+
+    
+
+  </main>
+
+  <!-- FOOTER -->
+  <app-footer></app-footer>
+
+</div>
+
+<!-- Botón volver arriba -->
+<button
+  *ngIf="showScrollTop"
+  (click)="scrollToTop()"
+  class="fixed bottom-6 right-6 bg-blue-950 text-white p-3 rounded-full shadow-lg hover:bg-blue-900 transition-all duration-300 z-50 opacity-90 hover:opacity-100 scrolltop-fade-in"
+  title="Volver arriba"
+>
+  <i class="fas fa-chevron-up text-sm"></i>
+</button>
+

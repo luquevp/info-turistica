@@ -1,0 +1,59 @@
+<section class="bg-gray-200 py-16 px-6 md:px-20">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-2">
+        Descubrí Rosario
+      </h2>
+      <p class="text-gray-600 mb-8">Lugares para conocer, vivir y disfrutar.</p>
+  
+      <div class="relative">
+        <!-- Flecha izquierda -->
+        <button
+          class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white p-2 rounded-full shadow-md"
+          (click)="scrollLeft()"
+        >
+          <i class="fas fa-chevron-left text-gray-700"></i>
+        </button>
+  
+        <!-- Carrusel -->
+        <div
+          #carrusel
+          class="flex gap-8 overflow-x-auto scroll-smooth px-4 md:px-6 hide-scrollbar"
+        >
+          <a
+            *ngFor="let lugar of lugares"
+            [routerLink]="['/lugar', lugar._id]"
+            class="min-w-[260px] max-w-[260px] h-[360px] flex-shrink-0 group rounded-lg overflow-hidden relative shadow-md transition-transform hover:scale-105"
+          >
+            <div class="w-full h-full overflow-hidden relative">
+              <img
+              [src]="lugar.imagenes.length ? lugar.imagenes[0] : 'assets/placeholder.jpg'"
+              [alt]="lugar.nombre"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              <!-- Fade oscuro -->
+              <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-300"></div>
+            </div>
+  
+            <!-- Texto sobre imagen -->
+            <div class="absolute bottom-4 left-4 right-4 text-white z-10">
+              <span class="bg-white/60 text-gray-800 text-xs px-2 py-1 rounded font-medium">
+                {{ lugar.categoria.nombre || 'Turismo' }}
+            </span>
+              <h3 class="text-lg font-bold mt-2 leading-snug drop-shadow-sm">
+                {{ lugar.nombre }}
+              </h3>
+            </div>
+          </a>
+        </div>
+  
+        <!-- Flecha derecha -->
+        <button
+          class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white p-2 rounded-full shadow-md"
+          (click)="scrollRight()"
+        >
+          <i class="fas fa-chevron-right text-gray-700"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+  

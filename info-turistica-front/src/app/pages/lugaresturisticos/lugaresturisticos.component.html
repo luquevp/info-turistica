@@ -1,0 +1,117 @@
+<!-- 🧭 Breadcrumb: Lugares -->
+
+<div class="bg-gray-100 px-4 sm:px-6 py-4 rounded-md text-sm" @fadeInUp>
+  <div class="flex flex-wrap items-center gap-1 sm:gap-2 text-gray-600">
+    <ng-container *ngFor="let item of [
+      { label: 'Inicio', route: '/' },
+      { label: 'Lugares Turísticos', route: '/dondeir' },
+    ]; let last = last">
+      <ng-container *ngIf="!last">
+        <a [routerLink]="item.route" class="hover:underline text-blue-800 font-medium">{{ item.label }}</a>
+        <span class="mx-1 text-gray-400">/</span>
+      </ng-container>
+      <ng-container *ngIf="last">
+        <span class="text-blue-900 font-semibold">{{ item.label }}</span>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
+
+<div class="px-4 sm:px-6 lg:px-8 py-10">
+  <div class="max-w-screen-xl mx-auto">
+
+    <!-- TÍTULO Y FILTRO -->
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-10">
+      <!-- TÍTULO -->
+      <div>
+        <h2 class="text-3xl font-bold text-slate-800">
+          <span class="border-l-4 border-blue-400 pl-3">LUGARES TURÍSTICOS</span>
+        </h2>
+        <span class="block text-sm text-slate-400 tracking-wide mt-1 uppercase">Lugares para conocer</span>
+      </div>
+
+      <!-- SELECT CATEGORÍA CUSTOM -->
+      <div class="relative w-full sm:w-60">
+        <button
+          (click)="toggleDropdown()"
+          class="w-full bg-white border border-gray-300 px-4 py-2 rounded-lg shadow-sm text-sm text-left text-slate-700 flex justify-between items-center hover:border-blue-400 focus:outline-none"
+        >
+          {{ getCategoriaNombreSeleccionada() || 'Todas las categorías' }}
+          <svg class="w-4 h-4 ml-2 text-gray-500" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+
+        <ul
+          *ngIf="isOpen"
+          class="absolute z-10 mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-md max-h-60 overflow-y-auto"
+        >
+          <li
+            class="px-4 py-2 text-sm hover:bg-blue-100 cursor-pointer"
+            (click)="selectCategoria('')"
+          >
+            Todas las categorías
+          </li>
+          <li
+            *ngFor="let cat of categorias"
+            class="px-4 py-2 text-sm hover:bg-blue-100 cursor-pointer"
+            (click)="selectCategoria(cat._id)"
+          >
+            {{ cat.nombre }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- LOADING -->
+    <app-loading-spinner *ngIf="cargando"></app-loading-spinner>
+
+    <!-- DESTACADOS -->
+    <div *ngIf="!cargando && lugaresDestacados.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+      <a
+        *ngFor="let lugar of lugaresDestacados"
+        [routerLink]="['/lugar', lugar._id]"
+        class="relative rounded-xl overflow-hidden shadow-md group cursor-pointer block"
+      >
+        <img
+          *ngIf="lugar.imagenes?.length"
+          [src]="lugar.imagenes[0]"
+          alt="{{ lugar.nombre }}"
+          class="w-full h-64 object-cover transition duration-300 group-hover:scale-105"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent group-hover:from-black/70 transition"></div>
+        <div class="absolute bottom-0 p-4 text-white">
+          <h3 class="text-lg font-bold leading-snug drop-shadow">{{ lugar.nombre }}</h3>
+          <p class="text-sm">{{ lugar.categoria.nombre }}</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- RESTANTES -->
+    <div *ngIf="!cargando && lugaresRestantes.length > 0" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+      <a
+        *ngFor="let lugar of lugaresRestantes"
+        [routerLink]="['/lugar', lugar._id]"
+        class="flex items-center space-x-4 bg-white rounded-lg p-3 shadow transition-all transform hover:scale-[1.02] hover:shadow-lg duration-200"
+      >
+        <img
+          *ngIf="lugar.imagenes?.length"
+          [src]="lugar.imagenes[0]"
+          alt="{{ lugar.nombre }}"
+          class="w-16 h-16 object-cover rounded-md"
+        />
+        <div>
+          <h4 class="text-sm font-semibold text-slate-800">{{ lugar.nombre }}</h4>
+          <p class="text-xs text-slate-500">{{ lugar.categoria.nombre }}</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- SIN RESULTADOS -->
+    <div *ngIf="!cargando && lugaresDestacados.length === 0 && lugaresRestantes.length === 0" class="text-center text-slate-500 mt-10">
+      No hay lugares turísticos activos en este momento.
+    </div>
+
+  </div>
+</div>

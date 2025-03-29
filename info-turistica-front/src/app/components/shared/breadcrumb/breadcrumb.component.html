@@ -1,0 +1,17 @@
+<nav class="text-sm text-gray-600 mb-6" aria-label="Breadcrumb">
+    <ol class="list-reset flex items-center space-x-2">
+      <li *ngFor="let item of items; let last = last">
+        <ng-container *ngIf="!last">
+          <a [routerLink]="item.route" class="hover:underline text-gray-500">
+            {{ item.label }}
+          </a>
+          <span class="mx-1 text-gray-400">/</span>
+        </ng-container>
+  
+        <ng-container *ngIf="last">
+          <span class="font-medium text-blue-900 truncate">{{ item.label }}</span>
+        </ng-container>
+      </li>
+    </ol>
+  </nav>
+  

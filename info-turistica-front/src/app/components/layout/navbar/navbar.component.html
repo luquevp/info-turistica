@@ -1,0 +1,79 @@
+<nav
+  [ngClass]="{
+    'bg-white': !scrolled,
+    'shadow-sm': !scrolled,
+    'bg-white/80 backdrop-blur-md shadow-md': scrolled
+  }"
+  class="sticky top-0 z-50 relative transition-all duration-300"
+>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-20 items-center justify-between"> <!-- h-20 más alto -->
+      
+      <!-- LOGO + TEXTO -->
+      <div class="flex items-center gap-4">
+        <img
+          [ngClass]="scrolled ? 'h-10' : 'h-14'"
+          src="assets/rosario-logo.png"
+          alt="Logo Municipalidad"
+          class="transition-all duration-300 w-auto"
+        />
+
+
+      </div>
+
+      <!-- MENÚ DESKTOP -->
+      <div class="hidden md:flex space-x-6">
+        <a routerLink="/" routerLinkActive="bg-gray-900 text-white" [routerLinkActiveOptions]="{ exact: true }"
+          class="px-3 py-2 rounded-md text-sm font-medium text-gray-900 hover:bg-gray-700 hover:text-white transition-all duration-200">INICIO</a>
+        <a routerLink="/dondeir" routerLinkActive="bg-gray-900 text-white"
+          class="px-3 py-2 rounded-md text-sm font-medium text-gray-900 hover:bg-gray-700 hover:text-white transition-all duration-200">DÓNDE IR</a>
+        <a routerLink="/quehacer" routerLinkActive="bg-gray-900 text-white"
+          class="px-3 py-2 rounded-md text-sm font-medium text-gray-900 hover:bg-gray-700 hover:text-white transition-all duration-200">QUÉ HACER</a>
+        <a routerLink="/experiencias" routerLinkActive="bg-gray-900 text-white"
+          class="px-3 py-2 rounded-md text-sm font-medium text-gray-900 hover:bg-gray-700 hover:text-white transition-all duration-200">EXPERIENCIAS</a>
+        <a routerLink="/blog" routerLinkActive="bg-gray-900 text-white"
+          class="px-3 py-2 rounded-md text-sm font-medium text-gray-900 hover:bg-gray-700 hover:text-white transition-all duration-200">ORGANIZÁ TU VIAJE</a>
+      </div>
+
+      <!-- BOTÓN MOBILE -->
+      <div class="-mr-2 flex md:hidden">
+        <button
+          type="button"
+          (click)="toggleMobileMenu()"
+          class="inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none"
+          aria-controls="mobile-menu"
+          [attr.aria-expanded]="mobileMenuOpen"
+        >
+          <span class="sr-only">Open main menu</span>
+          <!-- Iconos -->
+          <svg *ngIf="!mobileMenuOpen" class="h-6 w-6 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg *ngIf="mobileMenuOpen" class="h-6 w-6 transition-transform rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MENÚ MOBILE -->
+  <div
+    *ngIf="mobileMenuOpen"
+    @slideInOut
+    class="absolute top-full left-0 w-full bg-blue-950 px-4 pb-4 pt-2 space-y-1 z-50 md:hidden"
+  >
+    <a routerLink="/" routerLinkActive="bg-gray-900 text-white" [routerLinkActiveOptions]="{ exact: true }"
+      (click)="closeMobileMenu()" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition">Inicio</a>
+    <a routerLink="/dondeir" routerLinkActive="bg-gray-900 text-white"
+      (click)="closeMobileMenu()" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition">Dónde ir</a>
+    <a routerLink="/quehacer" routerLinkActive="bg-gray-900 text-white"
+      (click)="closeMobileMenu()" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition">Qué hacer</a>
+    <a routerLink="/historia" routerLinkActive="bg-gray-900 text-white"
+      (click)="closeMobileMenu()" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition">Historia</a>
+    <a routerLink="/blog" routerLinkActive="bg-gray-900 text-white"
+      (click)="closeMobileMenu()" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white transition">Blog</a>
+  </div>
+</nav>

@@ -1,0 +1,69 @@
+<section class="relative w-full bg-cover bg-center bg-no-repeat" style="background-image: url('assets/hero-rosario.jpg');">
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-black/40 z-0"></div>
+  
+    <!-- Contenido -->
+    <div class="relative z-10 w-full max-w-screen-xl mx-auto px-4 py-24 sm:py-28 md:py-36 lg:py-48 text-center">
+      <h1
+        class="text-white text-3xl md:text-5xl font-extrabold drop-shadow-md opacity-0 translate-y-4 animate-fade-in-up animation-delay-200"
+      >
+        Rosario de la Frontera te espera
+      </h1>
+      <p
+        class="text-white text-lg md:text-xl mt-4 drop-shadow-sm max-w-2xl mx-auto opacity-0 translate-y-4 animate-fade-in-up animation-delay-500"
+      >
+        Cultura, naturaleza y tradición del sur salteño.
+      </p>
+      <a
+        routerLink="/dondeir"
+        class="mt-8 inline-block bg-blue-900 hover:bg-blue-950 text-white px-6 py-3 rounded-lg font-medium transition
+               opacity-0 translate-y-4 animate-fade-in-up animation-delay-800"
+      >
+        Explorar lugares
+      </a>
+    </div>
+  </section>
+  
+
+  <section id="por-que-rosario" class="bg-white py-16 px-4">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-blue-900 mb-4">¿Por qué visitar Rosario?</h2>
+      <p class="text-gray-600 text-lg max-w-2xl mx-auto mb-12">
+        Termas, historia, paisajes y cultura en un solo lugar. Descubrí todo lo que te espera.
+      </p>
+  
+      <div class="grid gap-10 md:grid-cols-3 text-left">
+        <!-- Termas -->
+        <div class="flex flex-col items-center text-center opacity-0 animate-fade-in animation-delay-200">
+            <i class="fas fa-hot-tub text-blue-600 text-5xl mb-4"></i>
+          <h3 class="text-xl font-semibold text-blue-800 mb-2">Aguas termales</h3>
+          <p class="text-gray-600">
+            Disfrutá de las propiedades curativas de las termas reconocidas desde 1880.
+          </p>
+        </div>
+  
+        <!-- Cultura -->
+        <div class="flex flex-col items-center text-center opacity-0 animate-fade-in animation-delay-400">
+            <i class="fas fa-landmark text-blue-600 text-5xl mb-4"></i>
+          <h3 class="text-xl font-semibold text-blue-800 mb-2">Cultura e historia</h3>
+          <p class="text-gray-600">
+            Visitá iglesias, monumentos y lugares con tradición y valor histórico.
+          </p>
+        </div>
+  
+        <!-- Naturaleza -->
+        <div class="flex flex-col items-center text-center opacity-0 animate-fade-in animation-delay-600">
+            <i class="fas fa-tree text-blue-600 text-5xl mb-4"></i>
+          <h3 class="text-xl font-semibold text-blue-800 mb-2">Naturaleza viva</h3>
+          <p class="text-gray-600">
+            Explorá cerros, senderos y espacios verdes ideales para disfrutar en familia.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <app-lugares-carrusel></app-lugares-carrusel>
+
+  
